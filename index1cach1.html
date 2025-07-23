@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Check Ngày</title>
+
+  <style>
+    .error {
+        background-color: red;
+    }
+    .success {
+        background-color: green;
+    }
+    </style>
+</head>
+<body>
+  <h3>Nhập ngày cần kiểm tra:</h3>
+  <input type="date" id="dateInput">
+  <span id="ketqua"></span>
+  <br><br>
+  <button id="btnCheck">Kiểm tra ngày</button>
+
+  <script>
+    var dateInput = document.getElementById('dateInput');
+    var ketqua = document.getElementById('ketqua');
+    var btnCheck = document.getElementById('btnCheck');
+
+    btnCheck.onclick = () => {
+      var inputValue = dateInput.value;
+
+      ketqua.innerText = '';
+
+      if (inputValue) {
+        ketqua.innerText = 'Vui lòng chọn ngày';
+      }
+      else {
+        ketqua.className = 'error';
+        return;
+      }
+
+      var today = new Date();
+      var inputDate = new Date(inputValue);
+
+      today.setHours(0,0,0,0);
+      inputDate.setHours(0,0,0,0);
+      
+      if (inputDate.getTime() < today.getTime()) {
+        ketqua.innerText = 'Ngày trong quá khứ';
+        ketqua.className = 'error';
+      } else if (inputDate.getTime() > today.getTime()) {
+        ketqua.innerText = 'Ngày trong tương lai';
+        ketqua.className = 'success';
+      } else {
+        ketqua.innerText = 'Hiện tại';
+        ketqua.className = 'success';
+      }
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Email Validation</title>
+  <style>
+    .error { color: red; }
+    .success { color: green; }
+  </style>
+</head>
+<body>
+  <h3>Nhập địa chỉ email:</h3>
+  <input type="text" id="emailInput" placeholder="example@domain.com">
+  <button id="btncheck">Kiểm tra</button>
+  <p id="result"></p>
+
+  <script>
+    btncheck.onclick = function checkgmail() {
+      var email = document.getElementById("emailInput").value.trim();
+      var result = document.getElementById("result");
+      var btncheck = document.getElementById("btncheck");
+
+      var pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (email === "") {
+        result.textContent = "Bạn chưa nhập email.";
+        result.className = "error";
+      } else if (!pattern.test(email)) {
+        result.textContent = "Email không hợp lệ. Vui lòng nhập đúng định dạng.";
+        result.className = "error";
+      } else {
+        result.textContent = "Email hợp lệ!";
+        result.className = "success";
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiểm Tra Ngày</title>
+</head>
+
+<body>
+    <h2>Nhập Ngày (DD/MM/YYYY)</h2>
+    <input type="text" id="inputDate" placeholder="Nhập ngày (VD: 30/02/2025)">
+    <button id="btnSubmit">Gửi</button> <br>
+    <span id="message"></span>
+
+    <script>
+        var inputDate = document.getElementById('inputDate');
+        var btnSubmit = document.getElementById('btnSubmit');
+        var message = document.getElementById('message');
+
+        function validateDate(date) {
+            const parts = date.split('/');
+            if (parts.length !== 3) return false;
+
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10) - 1; 
+            const year = parseInt(parts[2], 10);
+
+            const datecheck = new Date(year, month, day);
+
+           
+            if (isNaN(datecheck.getTime())) return false;
+
+           
+            if (datecheck.getDate() !== day || datecheck.getMonth() !== month || datecheck.getFullYear() !== year) {
+                return false;
+            }
+
+            return true;
+        }
+
+        function checkDate() {
+        var today = new Date();
+        today.setHours(0, 0, 0, 0); 
+
+        var parts = inputDate.value.split('/');
+        var input = new Date(parts[2], parts[1] - 1, parts[0]); 
+        input.setHours(0, 0, 0, 0); 
+
+        if (input < today) {
+            return 'Ngày quá khứ';
+        } else if (input > today) {
+            return 'Ngày tương lai.';
+        } else {
+            return 'Hôm nay!';
+        }
+    }
+        function Submit() {
+            const dateValue = inputDate.value;
+
+            if (validateDate(dateValue)) {
+                message.innerText = 'Đây là ngày hợp lệ! ' + checkDate();
+                message.style.color = 'green';
+            } else {
+                message.innerText = 'Ngày này không hợp lệ. Hãy nhập lại.';
+                message.style.color = 'red';
+            }
+        }
+
+        btnSubmit.onclick = Submit;
+    </script>
+</body>
+
+</html>

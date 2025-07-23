@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Kiểm tra URL hợp lệ</title>
+  <style>
+    .error { color: red; }
+    .success { color: green; }
+  </style>
+</head>
+<body>
+
+  <h3>Nhập URL cần kiểm tra:</h3>
+  <input type="text" id="urlInput" placeholder="VD: https://example.com">
+  <button onclick="checkURL()">Kiểm tra</button>
+  <p id="result"></p>
+
+  <script>
+    function checkURL() {
+      var url = document.getElementById("urlInput").value.trim();
+      var result = document.getElementById("result");
+
+      var pattern = /^(https?:\/\/)?([a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]+)(:[0-9]{1,5})?(\/.*)?$/;
+
+      if (!url) {
+        result.textContent = "Bạn chưa nhập URL.";
+        result.className = "error";
+      } else if (!pattern.test(url)) {
+        result.textContent = "URL không hợp lệ.";
+        result.className = "error";
+      } else {
+        result.textContent = "URL hợp lệ!";
+        result.className = "success";
+      }
+    }
+  </script>
+
+</body>
+</html>
+
+

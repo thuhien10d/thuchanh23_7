@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Kiểm tra mật khẩu an toàn</title>
+  <style>
+    .error { color: red; }
+    .success { color: green; }
+  </style>
+</head>
+<body>
+  <h3>Nhập mật khẩu:</h3>
+  <input type="password" id="passwordInput" placeholder="Nhập mật khẩu">
+  <button id="btnCheckPass">Kiểm tra</button>
+  <p id="resultPass"></p>
+
+  <script>
+    var btn = document.getElementById("btnCheckPass");
+
+    btn.onclick = function checkPassword() {
+      var password = document.getElementById("passwordInput").value.trim();
+      var result = document.getElementById("resultPass");
+
+      var pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+      if (password === "") {
+        result.textContent = "Bạn chưa nhập mật khẩu.";
+        result.className = "error";
+      } else if (!pattern.test(password)) {
+        result.textContent = "Mật khẩu không an toàn. Phải có ít nhất 8 ký tự, gồm chữ hoa, chữ thường, số và ký tự đặc biệt.";
+        result.className = "error";
+      } else {
+        result.textContent = "Mật khẩu an toàn!";
+        result.className = "success";
+      }
+    };
+  </script>
+</body>
+</html>
+
