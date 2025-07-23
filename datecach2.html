@@ -26,19 +26,19 @@
             const month = parseInt(parts[1], 10) - 1; 
             const year = parseInt(parts[2], 10);
 
-            const datecheck = new Date(year, month, day);
+            const dateObj = new Date(year, month, day);
 
            
-            if (isNaN(datecheck.getTime())) return false;
+            if (isNaN(dateObj.getTime())) return false;
 
            
-            if (datecheck.getDate() !== day || datecheck.getMonth() !== month || datecheck.getFullYear() !== year) {
+            if (dateObj.getDate() !== day || dateObj.getMonth() !== month || dateObj.getFullYear() !== year) {
                 return false;
             }
 
             return true;
         }
-
+        
         function checkDate() {
         var today = new Date();
         today.setHours(0, 0, 0, 0); 
@@ -55,19 +55,20 @@
             return 'Hôm nay!';
         }
     }
-        function Submit() {
+
+        function handleSubmit() {
             const dateValue = inputDate.value;
 
             if (validateDate(dateValue)) {
-                message.innerText = 'Đây là ngày hợp lệ! ' + checkDate();
+                message.innerText = 'Ngày hợp lệ! ' + checkDate();
                 message.style.color = 'green';
             } else {
-                message.innerText = 'Ngày này không hợp lệ. Hãy nhập lại.';
+                message.innerText = 'Ngày không hợp lệ. Vui lòng nhập lại.';
                 message.style.color = 'red';
             }
         }
 
-        btnSubmit.onclick = Submit;
+        btnSubmit.onclick = handleSubmit;
     </script>
 </body>
 
